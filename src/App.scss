@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+
+* {
+	margin:0;
+	font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;
+	text-transform: capitalize;
+}
+
+@mixin flexBox($justify) {
+	display:flex;
+	justify-content: $justify;
+	align-items: center;
+}
+
+.app__header {
+	@include flexBox(space-between);
+	background:#24292e;
+	padding:1rem 3rem;
+	.app__logo {
+		width:50px;
+		height:50px;
+	}
+	form {
+		input {
+			padding:.2rem;
+			width:200px;
+			background:#404448;
+			border-radius:5px;
+			border:none;
+			font-size:18px;
+			outline:none;
+			transition:.5s;
+			color:white;
+			text-transform: none;
+			&:focus {
+				width:300px;
+			}
+		}
+	}
+}
+.app__users {
+	padding:3rem 0;
+	.users {
+		@include flexBox(center);
+		flex-wrap:wrap;	
+		.user {
+			max-width:200px;
+			margin:.5rem;
+			.user__profile {
+				width:200px;
+				height:140px;
+			}
+		}
+	}
+}
+.user__container {
+	position: absolute;
+    width: 400px;
+    background-color: #F2F2F2;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 5px rgba(0,0,0,.4);
+    padding: 1rem .5rem 1rem 1rem;
+	.user__info {
+		@include flexBox(space-between);
+		.user__avatar {
+			display:flex;
+			flex-direction: column;
+			text-align: center;
+			margin-bottom: 10px;
+		}
+		h3 {
+			span {
+				color:rgba(255,0,0,.8);
+			}
+		}
+	}	
+}
+
+
+@media all and (max-width:500px) {
+	.app__header {
+		padding:1rem;
+		form {
+			input {
+				font-size:16px;
+				width:140px;
+				&:focus {
+					width:200px;
+				}
+			}
+		}
+	}
+	.app__users {
+		padding:1rem;
+		.users {
+			.user {
+				max-width:300px;
+				.user__profile {
+					width:300px;
+					height:200px;
+				}
+			}
+		}
+	}
+	.user__container {
+		width:360px;
+	}
+}
