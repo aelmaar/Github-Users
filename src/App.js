@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "./axios";
 import github from "./github.png";
 import User from "./User";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import UserInfoPerson from "./UserInfoPerson";
 import "./App.css";
 
 function App() {
@@ -36,30 +38,35 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <header className="app__header">
-        <img src={github} alt="github" className="app__logo" />
-        <form onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder="Search A User..."
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </form>
-      </header>
-      <div className="app__users">
-        <div className="users">
-          {!user ? (
-            users.map((user) => <User user={user} />)
-          ) : !error ? (
-            <User user={user} />
-          ) : (
-            <h1>{error}</h1>
-          )}
-        </div>
+    <Router>
+      <div className="app">
+        <Route exact path="/">
+          <header className="app__header">
+            <img src={github} alt="github" className="app__logo" />
+            <form onSubmit={handleSearch}>
+              <input
+                type="text"
+                placeholder="Search A User..."
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </form>
+          </header>
+          <div className="app__users">
+            <div className="users">
+              {!user ? (
+                users.map((user) => <User user={user} />)
+              ) : !error ? (
+                <User key={user.id} user={user} />
+              ) : (
+                <h1>{error}</h1>
+              )}
+            </div>
+          </div>
+        </Route>
+        <Route path={`/:login`} children={<UserInfoPerson />}></Route>
       </div>
-    </div>
+    </Router>
   );
 }
 
